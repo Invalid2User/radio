@@ -56,7 +56,7 @@ public class RadioTest {
     @CsvSource({
             "5,6",
             "9,10",
-            "10,11",
+            "100,100",
             "1,2"
     })
     void increasingVolume(int volume, int expected) {
