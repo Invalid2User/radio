@@ -1,10 +1,13 @@
 package ru.netology.radio;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class RadioTest {
+    Radio serv = new Radio();
+
     @ParameterizedTest
     @CsvSource({
             "-2,0",
@@ -14,7 +17,6 @@ public class RadioTest {
             "10,0"
     })
     void setter(int setStation, int expected) {
-        Radio serv = new Radio();
         serv.setCurrentStation(setStation);
         int actual = serv.getCurrentStation();
 
@@ -29,7 +31,6 @@ public class RadioTest {
             "9,0",
     })
     void next(int setStation, int expected) {
-        Radio serv = new Radio();
         serv.setCurrentStation(setStation);
         serv.nextStation();
         int actual = serv.getCurrentStation();
@@ -44,7 +45,6 @@ public class RadioTest {
             "0,9"
     })
     void prev(int setStation, int expected) {
-        Radio serv = new Radio();
         serv.setCurrentStation(setStation);
         serv.previousStation();
         int actual = serv.getCurrentStation();
@@ -56,11 +56,10 @@ public class RadioTest {
     @CsvSource({
             "5,6",
             "9,10",
-            "10,10",
+            "10,11",
             "1,2"
     })
     void increasingVolume(int volume, int expected) {
-        Radio serv = new Radio();
         serv.setVolume(volume);
         serv.volumeUp();
         int actual = serv.getCurrentVolume();
@@ -76,11 +75,23 @@ public class RadioTest {
             "1,0"
     })
     void decreasingVolume(int volume, int expected) {
-        Radio serv = new Radio();
         serv.setVolume(volume);
         serv.volumeDown();
         int actual = serv.getCurrentVolume();
 
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    void setNumberOfStations() {
+        Radio serv = new Radio(15);
+        int expected = 15;
+        int actual = serv.getNumberOfStations();
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    void getBasicNumberOfStations() {
+        int expected = 10;
+        int actual = serv.getNumberOfStations();
         Assertions.assertEquals(expected, actual);
     }
 }
